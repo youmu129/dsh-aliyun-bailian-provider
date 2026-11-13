@@ -4,7 +4,7 @@ DSH（DeepSeek Harness）插件：为 Web GUI 接入阿里云百炼 Token Plan�
 
 ## 功能
 
-- **provider 播种**：启动时把 `bailian-token-plan` 路由写入 `llm-pi-ai` 用户设置层——与 Models 页「自定义模型 API」卡片同一条写入路径，按 provider 键合并，与其他插件互不覆盖；模型选择器随即出现 `qwen3.8-max` / `qwen3.8-flash` / `deepseek-v4.1-flash` / `deepseek-v4-pro-0813` / `glm-5.3` / `glm-5.2`。
+- **provider 播种**：启动时把 `bailian-token-plan` 路由写入 `llm-pi-ai` 用户设置层——与 Models 页「自定义模型 API」卡片同一条写入路径，按 provider 键合并，与其他插件互不覆盖；模型选择器随即出现 `qwen4-max-preview` / `qwen3.8-max` / `qwen3.8-flash` / `deepseek-v4.1-flash` / `deepseek-v4-pro-0813` / `glm-5.3` / `glm-5.2`。
 - **用量 pill**：会话选用百炼模型时，输入卡片下方显示用量 pill——摘要为 5 小时窗口 / 每周配额百分比（≥90% 标红），点击弹出面板查看 5 小时 / 每周 / 月度配额的已用百分比、进度条与重置时间。数据直连百炼 console 网关 API（协议复刻自官方 CLI），不派生 `bl` 子进程。
 
 ## 用法

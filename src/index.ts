@@ -62,7 +62,7 @@ interface SeedProfile {
   models: SeedModel[]
 }
 
-/** The bailian-token-plan route (migrated verbatim from dsh-plugin-custom-providers, compat section included). */
+/** The bailian-token-plan route (migrated from dsh-plugin-custom-providers, compat section included; models kept in sync with the Bailian Token Plan lineup). */
 const PROFILE: SeedProfile = {
   displayName: 'Bailian Token Plan',
   apiKeyEnv: 'BAILIAN_TOKEN_PLAN_API_KEY',
@@ -74,6 +74,13 @@ const PROFILE: SeedProfile = {
     maxTokensField: 'max_tokens',
   },
   models: [
+    {
+      id: 'qwen4-max-preview',
+      name: 'Qwen-4-Max-Preview',
+      contextWindow: 1000000,
+      input: ['text', 'image'],
+      reasoningEfforts: { off: null, low: 'low', high: 'medium', max: 'xhigh' },
+    },
     {
       id: 'qwen3.8-max',
       name: 'Qwen-3.8-Max',

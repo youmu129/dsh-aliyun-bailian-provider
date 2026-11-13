@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Bailian token plan provider",
+    "description": "Seeds the bailian-token-plan route (Qwen / DeepSeek / GLM model series) into the Models page and shows a usage pill under the composer in Bailian sessions: 5-hour window and weekly quota percentages (red at 90%+), with a panel for the monthly quota, progress bars and reset times. Usage queries read the console login written by the bl CLI (~/.bailian/config.json); run bl auth login --console first. The seed is authoritative and re-applied on every start, overwriting manual edits to this route; uninstall the plugin to customize or remove it. The inference key resolves per request from the BAILIAN_TOKEN_PLAN_API_KEY credential."
+  }
+}

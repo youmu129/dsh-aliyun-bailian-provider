@@ -3,3 +3,4 @@
 import './seed.test.ts'
 import './bailian.test.ts'
 import './locale.test.ts'
+import './manifest.test.ts'

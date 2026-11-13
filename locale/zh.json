@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "百炼 Token Plan 供应商",
+    "description": "向 Models 页播种 bailian-token-plan 路由（Qwen / DeepSeek / GLM 系列模型），百炼会话的输入卡片下方显示用量 pill：5 小时窗口 / 每周配额百分比（≥90% 标红），点击面板查看月度配额、进度条与重置时间。用量查询现读 bl CLI 落盘的 console 登录态（~/.bailian/config.json），需先执行 bl auth login --console。种子权威，每次启动自动重新同步，该路由的手工编辑会被覆写；要自定义或移除请卸载本插件。推理 Key 经 BAILIAN_TOKEN_PLAN_API_KEY 凭证按请求解析。"
+  }
+}

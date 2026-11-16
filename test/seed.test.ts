@@ -32,8 +32,9 @@ test('seed profile satisfies the hand-declared route requirements', () => {
   }
 })
 
-test('seed profile matches the bailian-token-plan definition in dsh-plugin-custom-providers', () => {
-  // 迁移基准：repos/dsh-plugin-custom-providers/cordis.patch.yml 的 bailian-token-plan 段
+test('seed profile matches the bailian-token-plan baseline plus the Qwen4-Max lineup', () => {
+  // 迁移基准：repos/dsh-plugin-custom-providers/cordis.patch.yml 的 bailian-token-plan 段；
+  // 模型断言按 id 分组（不依赖列表顺序，新模型置顶不影响基准）
   const profile = seedProfile()
   assert.equal(profile.displayName, 'Bailian Token Plan')
   assert.equal(profile.apiKeyEnv, 'BAILIAN_TOKEN_PLAN_API_KEY')
@@ -44,17 +45,23 @@ test('seed profile matches the bailian-token-plan definition in dsh-plugin-custo
   assert.deepEqual(profile.compat, { supportsDeveloperRole: false, maxTokensField: 'max_tokens' })
   assert.deepEqual(
     profile.models.map((m) => m.id),
-    ['qwen4-max-preview', 'qwen3.8-max', 'qwen3.8-flash', 'deepseek-v4.1-flash', 'deepseek-v4-pro-0813', 'glm-5.3', 'glm-5.2'],
+    ['qwen4-max', 'qwen4-max-preview', 'qwen3.8-max', 'qwen3.8-flash', 'deepseek-v4.1-flash', 'deepseek-v4-pro-0813', 'glm-5.3', 'glm-5.2'],
   )
-  // qwen 系列沿用同一推理等级映射（off: null = 等级存在、线上不发送）
-  assert.deepEqual(profile.models[0].reasoningEfforts, { off: null, low: 'low', high: 'medium', max: 'xhigh' })
-  assert.deepEqual(profile.models[0].input, ['text', 'image'])
-  assert.deepEqual(profile.models[1].reasoningEfforts, { off: null, low: 'low', high: 'medium', max: 'xhigh' })
-  assert.deepEqual(profile.models[1].input, ['text', 'image'])
-  assert.deepEqual(profile.models[4].input, ['text'])
+  const byId = new Map(profile.models.map((m) => [m.id, m]))
+  // qwen 系列沿用同一推理等级映射（off: null = 等级存在、线上不发送）；
+  // qwen4-max 正式版规格据百炼官方文档：1M 上下文、text+image
+  for (const id of ['qwen4-max', 'qwen4-max-preview', 'qwen3.8-max', 'qwen3.8-flash']) {
+    const model = byId.get(id)!
+    assert.equal(model.contextWindow, 1000000)
+    assert.deepEqual(model.reasoningEfforts, { off: null, low: 'low', high: 'medium', max: 'xhigh' })
+    assert.deepEqual(model.input, ['text', 'image'])
+  }
+  assert.equal(byId.get('qwen4-max')!.name, 'Qwen-4-Max')
+  assert.deepEqual(byId.get('deepseek-v4-pro-0813')!.input, ['text'])
   // glm 两个模型不声明 off/low（与基准一致）
-  assert.deepEqual(profile.models[5].reasoningEfforts, { high: 'high', max: 'max' })
-  assert.deepEqual(profile.models[6].reasoningEfforts, { high: 'high', max: 'max' })
+  for (const id of ['glm-5.3', 'glm-5.2']) {
+    assert.deepEqual(byId.get(id)!.reasoningEfforts, { high: 'high', max: 'max' })
+  }
 })
 
 test('patch inserts own row and never targets the llm-pi-ai row', () => {

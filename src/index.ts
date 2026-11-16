@@ -76,6 +76,16 @@ const PROFILE: SeedProfile = {
     maxTokensField: 'max_tokens',
   },
   models: [
+    // Qwen4-Max 正式版（2026-11 上架，规格据百炼官方文档 qwen4-max 页：
+    // 1M 上下文、文本/图像/视频输入、思考等级 low/high/xhigh 默认 high，
+    // 沿用 Qwen 系列映射 off→null / low→low / high→medium / max→xhigh）
+    {
+      id: 'qwen4-max',
+      name: 'Qwen-4-Max',
+      contextWindow: 1000000,
+      input: ['text', 'image'],
+      reasoningEfforts: { off: null, low: 'low', high: 'medium', max: 'xhigh' },
+    },
     {
       id: 'qwen4-max-preview',
       name: 'Qwen-4-Max-Preview',

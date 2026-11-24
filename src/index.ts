@@ -94,13 +94,6 @@ const PROFILE: SeedProfile = {
       reasoningEfforts: { off: null, low: 'low', high: 'medium', max: 'xhigh' },
     },
     {
-      id: 'qwen3.8-max',
-      name: 'Qwen-3.8-Max',
-      contextWindow: 1000000,
-      input: ['text', 'image'],
-      reasoningEfforts: { off: null, low: 'low', high: 'medium', max: 'xhigh' },
-    },
-    {
       id: 'qwen3.8-flash',
       name: 'Qwen-3.8-Flash',
       contextWindow: 1000000,
@@ -124,13 +117,6 @@ const PROFILE: SeedProfile = {
     {
       id: 'glm-5.3',
       name: 'GLM-5.3',
-      contextWindow: 1000000,
-      input: ['text'],
-      reasoningEfforts: { high: 'high', max: 'max' },
-    },
-    {
-      id: 'glm-5.2',
-      name: 'GLM-5.2',
       contextWindow: 1000000,
       input: ['text'],
       reasoningEfforts: { high: 'high', max: 'max' },

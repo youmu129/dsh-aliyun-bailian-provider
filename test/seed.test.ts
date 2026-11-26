@@ -45,12 +45,12 @@ test('seed profile matches the bailian-token-plan baseline plus the Qwen4-Max li
   assert.deepEqual(profile.compat, { supportsDeveloperRole: false, maxTokensField: 'max_tokens' })
   assert.deepEqual(
     profile.models.map((m) => m.id),
-    ['qwen4-max', 'qwen4-max-preview', 'qwen3.8-flash', 'deepseek-v4.1-flash', 'deepseek-v4-pro-0813', 'glm-5.3'],
+    ['qwen4-max', 'qwen3.8-flash', 'deepseek-v4.1-flash', 'deepseek-v4-pro-0813', 'glm-5.3'],
   )
   const byId = new Map(profile.models.map((m) => [m.id, m]))
   // qwen 系列沿用同一推理等级映射（off: null = 等级存在、线上不发送）；
   // qwen4-max 正式版规格据百炼官方文档：1M 上下文、text+image
-  for (const id of ['qwen4-max', 'qwen4-max-preview', 'qwen3.8-flash']) {
+  for (const id of ['qwen4-max', 'qwen3.8-flash']) {
     const model = byId.get(id)!
     assert.equal(model.contextWindow, 1000000)
     assert.deepEqual(model.reasoningEfforts, { off: null, low: 'low', high: 'medium', max: 'xhigh' })

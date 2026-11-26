@@ -87,13 +87,6 @@ const PROFILE: SeedProfile = {
       reasoningEfforts: { off: null, low: 'low', high: 'medium', max: 'xhigh' },
     },
     {
-      id: 'qwen4-max-preview',
-      name: 'Qwen-4-Max-Preview',
-      contextWindow: 1000000,
-      input: ['text', 'image'],
-      reasoningEfforts: { off: null, low: 'low', high: 'medium', max: 'xhigh' },
-    },
-    {
       id: 'qwen3.8-flash',
       name: 'Qwen-3.8-Flash',
       contextWindow: 1000000,
